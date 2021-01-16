@@ -18,11 +18,11 @@ class UserPage extends Component {
     );
 
     if (this.props.store.user.access_level === 0) {
-      <UserAdminContent />;
+      userContent = <UserAdminContent />;
     } else if (this.props.store.user.access_level === 3) {
-      <UserManagerContent />;
+      userContent = <UserManagerContent />;
     } else if (this.props.store.user.access_level === 6) {
-      <UserPeonContent />;
+      userContent = <UserPeonContent />;
     }
 
     return <div>{userContent}</div>;
