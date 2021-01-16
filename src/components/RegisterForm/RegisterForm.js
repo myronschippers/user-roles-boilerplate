@@ -6,7 +6,17 @@ class RegisterForm extends Component {
   state = {
     username: '',
     password: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    role: '',
   };
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'FETCH_ROLES',
+    });
+  }
 
   registerUser = (event) => {
     event.preventDefault();
@@ -19,6 +29,7 @@ class RegisterForm extends Component {
         email: this.state.email,
         first_name: this.state.firstName,
         last_name: this.state.lastName,
+        role_id: this.state.role,
       },
     });
   }; // end registerUser
@@ -72,6 +83,26 @@ class RegisterForm extends Component {
               required
               onChange={this.handleInputChangeFor('email')}
             />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="password">
+            Role:
+            <select
+              name="role"
+              required
+              value={this.state.role}
+              onChange={this.handleInputChangeFor('role')}
+            >
+              <option value="">--Please choose an option--</option>
+              {this.props.store.roles.map((item, index) => {
+                return (
+                  <option value={item.id} key={index}>
+                    {item.label}
+                  </option>
+                );
+              })}
+            </select>
           </label>
         </div>
         <div>

@@ -11,6 +11,18 @@ router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
 });
 
+router.get('/roles', (req: Request, res: Response): void => {
+  const queryText = `SELECT * FROM roles;`;
+  pool
+    .query(queryText)
+    .then((dbResp) => {
+      res.send(dbResp.rows);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+    });
+});
+
 router.post(
   '/register',
   (req: Request, res: Response, next: express.NextFunction): void => {
