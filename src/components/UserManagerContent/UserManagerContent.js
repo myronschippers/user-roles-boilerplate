@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../../components/LogOutButton/LogOutButton';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // A logged in user landing page specific to an Manager User
