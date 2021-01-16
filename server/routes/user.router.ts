@@ -31,12 +31,22 @@ router.post(
     const email: string | null = req.body.email;
     const first_name: string | null = req.body.first_name;
     const last_name: string | null = req.body.last_name;
+    const role_id: string | null = req.body.role_id;
 
-    const queryText: string = `INSERT INTO "user" (username, password, email, first_name, last_name)
-    VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+    const queryText: string = `INSERT INTO "user" (username, password, email, first_name, last_name, role_id)
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
     pool
-      .query(queryText, [username, password, email, first_name, last_name])
-      .then(() => res.sendStatus(201))
+      .query(queryText, [
+        username,
+        password,
+        email,
+        first_name,
+        last_name,
+        role_id,
+      ])
+      .then((dbResp) => {
+        res.sendStatus(201);
+      })
       .catch((err) => {
         console.log(`Error saving user to database: ${err}`);
         res.sendStatus(500);
